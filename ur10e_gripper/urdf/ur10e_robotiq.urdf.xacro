@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur10e_robotiq">
+
+  <xacro:macro name="ur10e_robotiq" params="prefix:=''">
+
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur10e_macro.xacro"/>
+  <xacro:ur10e_robot prefix = "${prefix}"/>
+
+  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_macro.xacro" />
+
+  <link name="world" />
+  <joint name="world_to_base_link=" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+  <joint name="rq_coupler_joint" type="fixed">
+    <parent link="tool0" />
+    <child  link = "base_link0" />
+    <origin xyz="0 0 0" rpy="0 0 ${0.5*pi}" />
+  </joint>
+    <xacro:robotiq_arg2f_85 prefix=""/>
+
+  <!-- <link name="robotiq_coupler">
+  <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${0.075*0.5}" length="0.01"/>
+      </geometry>
+      <material name="RobotiqGrey">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+  </visual>
+  <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${0.075*0.5}" length="0.04"/>
+      </geometry>
+      <material name="RobotiqGrey">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+  </collision>
+  <inertial>
+    <mass value="0.5"/>
+    <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.4"/>
+  </inertial>
+  </link>
+
+  <joint name="robotiq_joint" type="fixed">
+    <parent link="robotiq_coupler" />
+    <child link = "base_link0" />
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 ${0.0*pi}" />
+  </joint>
+    <xacro:robotiq_arg2f_85 prefix=""/> -->
+
+  <!-- <joint name="rq_connector_joint" type="fixed">
+  <parent link="robotiq_coupler" />
+  <child  link = "rq_connector" />
+  <origin xyz="-0.06 0 0" rpy="0 0 0" />
+  </joint> -->
+
+</xacro:macro>
+
+<gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+</gazebo>
+
+</robot>

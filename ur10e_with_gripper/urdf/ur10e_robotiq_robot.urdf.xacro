@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur10e_robotiq" >
-
-  <!-- ur10e+robotiq -->
-  <xacro:include filename="$(find ur10e_with_gripper)/urdf/ur10e_robotiq.urdf.xacro" />
-  <xacro:ur10e_robotiq /> <!--DO NOT DELETE -->
-</robot>
